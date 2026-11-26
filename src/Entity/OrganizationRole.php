@@ -13,44 +13,16 @@ class OrganizationRole
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    private ?int $id = null {
-        get {
-            return $this->id;
-        }
-        set {
-            $this->id = $value;
-        }
-    }
+    public ?int $id = null;
 
     #[ORM\ManyToOne(targetEntity: Organization::class)]
-    private Organization $organization {
-        get {
-            return $this->organization;
-        }
-        set {
-            $this->organization = $value;
-        }
-    }
+    public Organization $organization;
 
     #[ORM\Column(length: 255)]
-    private ?string $name = null {
-        get {
-            return $this->name;
-        }
-        set {
-            $this->name = $value;
-        }
-    }
+    public ?string $name = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $description = null {
-        get {
-            return $this->description;
-        }
-        set {
-            $this->description = $value;
-        }
-    }
+    public ?string $description;
 
     #[ORM\Column(type: Types::JSON)]
     private array $permissions = [];

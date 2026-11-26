@@ -13,44 +13,16 @@ class ProjectRole
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    private ?int $id = null {
-        get {
-            return $this->id;
-        }
-        set {
-            $this->id = $value;
-        }
-    }
+    public ?int $id = null;
 
     #[ORM\ManyToOne(targetEntity: Project::class)]
-    private Project $project {
-        get {
-            return $this->project;
-        }
-        set {
-            $this->project = $value;
-        }
-    }
+    public Project $project;
 
     #[ORM\Column(length: 255)]
-    private ?string $name = null {
-        get {
-            return $this->name;
-        }
-        set {
-            $this->name = $value;
-        }
-    }
+    public ?string $name = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $description = null {
-        get {
-            return $this->description;
-        }
-        set {
-            $this->description = $value;
-        }
-    }
+    public ?string $description = null;
 
     #[ORM\Column(type: Types::JSON)]
     private array $permissions = [];

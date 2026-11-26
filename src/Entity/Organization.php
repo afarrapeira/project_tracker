@@ -13,54 +13,19 @@ class Organization
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    private ?int $id = null {
-        get {
-            return $this->id;
-        }
-        set {
-            $this->id = $value;
-        }
-    }
+    public ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $name = null {
-        get {
-            return $this->name;
-        }
-        set {
-            $this->name = $value;
-        }
-    }
+    public ?string $name = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $description = null {
-        get {
-            return $this->description;
-        }
-        set {
-            $this->description = $value;
-        }
-    }
+    public ?string $description = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $slug = null {
-        get {
-            return $this->slug;
-        }
-        set {
-            $this->slug = $value;
-        }
-    }
+    public ?string $slug = null;
 
     #[ORM\OneToMany(targetEntity: OrganizationMember::class, mappedBy: 'organization',cascade: ['persist'], orphanRemoval: true)]
-    private Collection $organizationMembers {
-        get {
-            return $this->organizationMembers;
-        }
-        set {
-            $this->organizationMembers = $value;
-        }
-    }
+    public private(set) Collection $organizationMembers;
     public function __construct()
     {
         $this->organizationMembers = new ArrayCollection();

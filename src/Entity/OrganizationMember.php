@@ -19,68 +19,31 @@ class OrganizationMember
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    private ?int $id = null {
-        get {
-            return $this->id;
-        }
-        set {
-            $this->id = $value;
-        }
-    }
+    public ?int $id = null;
 
     #[ORM\ManyToOne(targetEntity: Organization::class, inversedBy: "organizationMembers")]
     #[ORM\JoinColumn(nullable: false, onDelete: 'CASCADE')]
-    public ?Organization $organization = null {
-        get {
-            return $this->organization;
-        }
-        set {
-            $this->organization = $value;
-        }
-    }
+    public ?Organization $organization = null;
 
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: "organizationMembers")]
     #[ORM\JoinColumn(nullable: false, onDelete: 'CASCADE')]
-    public ?User $user = null {
-        get {
-            return $this->user;
-        }
-        set {
-            $this->user = $value;
-        }
-    }
+    public ?User $user = null;
 
     #[ORM\ManyToOne(targetEntity: OrganizationRole::class)]
-    public ?OrganizationRole $role = null {
-        get {
-            return $this->role;
-        }
-        set {
-            $this->role = $value;
-        }
-    }
+    public ?OrganizationRole $role = null;
 
     #[ORM\Column]
-    private bool $active = true {
-        get {
-            return $this->active;
-        }
-        set {
-            $this->active = $value;
-        }
-    }
+    public bool $active = true;
 
     #[ORM\Column]
-    private \DateTimeImmutable $joinedAt;
+    public bool $isOwner = false;
+
+    #[ORM\Column]
+    public \DateTimeImmutable $joinedAt;
 
     public function __construct()
     {
         $this->joinedAt = new \DateTimeImmutable();
-    }
-
-    public function getJoinedAt(): \DateTimeImmutable
-    {
-        return $this->joinedAt;
     }
 
 }

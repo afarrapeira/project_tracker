@@ -13,64 +13,22 @@ class Project
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    private ?int $id = null {
-        get {
-            return $this->id;
-        }
-        set {
-            $this->id = $value;
-        }
-    }
+    public ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $name = null {
-        get {
-            return $this->name;
-        }
-        set {
-            $this->name = $value;
-        }
-    }
+    public ?string $name = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $description = null {
-        get {
-            return $this->description;
-        }
-        set {
-            $this->description = $value;
-        }
-    }
+    public ?string $description = null;
 
     #[ORM\Column(length: 10)]
-    private ?string $shortName = null {
-        get {
-            return $this->shortName;
-        }
-        set {
-            $this->shortName = $value;
-        }
-    }
+    public ?string $shortName = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $slug = null {
-        get {
-            return $this->slug;
-        }
-        set {
-            $this->slug = $value;
-        }
-    }
+    public ?string $slug = null;
 
     #[ORM\OneToMany(targetEntity: ProjectMember::class, mappedBy: 'project',cascade: ['persist'], orphanRemoval: true)]
-    private Collection $projectMembers {
-        get {
-            return $this->projectMembers;
-        }
-        set(Collection $value) {
-            $this->projectMembers = $value;
-        }
-    }
+    public Collection $projectMembers;
 
     public function __construct()
     {

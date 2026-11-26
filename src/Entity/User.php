@@ -13,94 +13,47 @@ class User
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    private ?int $id = null {
+    public ?int $id;
+
+    #[ORM\Column(length: 255)]
+    public ?string $username = null {
         get {
-            return $this->id;
-        }
-        set {
-            $this->id = $value;
+            return mb_trim($this->username);
         }
     }
 
     #[ORM\Column(length: 255)]
-    private ?string $username = null {
+    public ?string $password = null;
+
+    #[ORM\Column(length: 255)]
+    public ?string $email = null {
         get {
-            return $this->username;
-        }
-        set {
-            $this->username = $value;
+            return mb_trim(mb_strtolower($this->email));
         }
     }
 
     #[ORM\Column(length: 255)]
-    private ?string $password = null {
+    public ?string $phone = null;
+
+    #[ORM\Column(length: 255)]
+    public ?string $name = null {
         get {
-            return $this->password;
-        }
-        set {
-            $this->password = $value;
+            return mb_trim($this->name);
         }
     }
 
     #[ORM\Column(length: 255)]
-    private ?string $email = null {
+    public ?string $lastName = null {
         get {
-            return $this->email;
-        }
-        set {
-            $this->email = $value;
-        }
-    }
-
-    #[ORM\Column(length: 255)]
-    private ?string $phone = null {
-        get {
-            return $this->phone;
-        }
-        set {
-            $this->phone = $value;
-        }
-    }
-
-    #[ORM\Column(length: 255)]
-    private ?string $name = null {
-        get {
-            return $this->name;
-        }
-        set {
-            $this->name = $value;
-        }
-    }
-
-    #[ORM\Column(length: 255)]
-    private ?string $lastName = null {
-        get {
-            return $this->lastName;
-        }
-        set {
-            $this->lastName = $value;
+            return mb_trim($this->lastName);
         }
     }
 
     #[ORM\OneToMany(targetEntity: ProjectMember::class, mappedBy: 'user', cascade: ['persist'], orphanRemoval: true)]
-    private Collection $projectMembers {
-        get {
-            return $this->projectMembers;
-        }
-        set {
-            $this->projectMembers = $value;
-        }
-    }
+    public Collection $projectMembers;
 
     #[ORM\OneToMany(targetEntity: OrganizationMember::class, mappedBy: 'user', cascade: ['persist'], orphanRemoval: true)]
-    private Collection $organizationMembers {
-        get {
-            return $this->organizationMembers;
-        }
-        set {
-            $this->organizationMembers = $value;
-        }
-    }
+    public Collection $organizationMembers;
 
     public function __construct()
     {
