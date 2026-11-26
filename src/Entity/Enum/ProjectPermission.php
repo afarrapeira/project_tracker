@@ -2,15 +2,12 @@
 
 namespace App\Entity\Enum;
 
-enum Permission: string
+enum ProjectPermission: string
 {
     case PROJECT_MANAGE = 'project.manage';
     case PROJECT_VIEW = 'project.view';
     case PROJECT_DELETE = 'project.delete';
     case PROJECT_EDIT = 'project.edit';
-
-    case USER_INVITE = 'user.invite';
-    case USER_DELETE = 'user.delete';
 
     case TASK_CREATE = 'task.create';
     case TASK_ASSIGN = 'task.assign';

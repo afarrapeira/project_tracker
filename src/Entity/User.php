@@ -87,14 +87,25 @@ class User
         get {
             return $this->projectMembers;
         }
-        set(Collection $value) {
+        set {
             $this->projectMembers = $value;
+        }
+    }
+
+    #[ORM\OneToMany(targetEntity: OrganizationMember::class, mappedBy: 'user', cascade: ['persist'], orphanRemoval: true)]
+    private Collection $organizationMembers {
+        get {
+            return $this->organizationMembers;
+        }
+        set {
+            $this->organizationMembers = $value;
         }
     }
 
     public function __construct()
     {
         $this->projectMembers = new ArrayCollection();
+        $this->organizationMembers = new ArrayCollection();
     }
 
     public function addProjectMember(ProjectMember $projectMember): void
@@ -110,6 +121,23 @@ class User
         if ($this->projectMembers->removeElement($projectMember)) {
             if ($projectMember->user === $this) {
                 $projectMember->user = null;
+            }
+        }
+    }
+
+    public function addOrganizationMember(OrganizationMember $organizationMember): void
+    {
+        if (!$this->organizationMembers->contains($organizationMember)) {
+            $this->organizationMembers->add($organizationMember);
+            $organizationMember->user = $this;
+        }
+    }
+
+    public function removeOrganizationMember(OrganizationMember $organizationMember): void
+    {
+        if ($this->organizationMembers->removeElement($organizationMember)) {
+            if ($organizationMember->user === $this) {
+                $organizationMember->user = null;
             }
         }
     }

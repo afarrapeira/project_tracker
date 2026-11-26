@@ -2,13 +2,13 @@
 
 namespace App\Entity;
 
-use App\Entity\Enum\Permission;
-use App\Repository\RoleRepository;
+use App\Entity\Enum\OrganizationPermission;
+use App\Repository\OrganizationRoleRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: RoleRepository::class)]
-class Role
+#[ORM\Entity(repositoryClass: OrganizationRoleRepository::class)]
+class OrganizationRole
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -22,13 +22,13 @@ class Role
         }
     }
 
-    #[ORM\ManyToOne(targetEntity: Project::class)]
-    private Project $project {
+    #[ORM\ManyToOne(targetEntity: Organization::class)]
+    private Organization $organization {
         get {
-            return $this->project;
+            return $this->organization;
         }
         set {
-            $this->project = $value;
+            $this->organization = $value;
         }
     }
 
@@ -58,7 +58,7 @@ class Role
     public function getPermissions(): array
     {
         return array_map(
-            static fn (string $permission) => Permission::from($permission),
+            static fn (string $permission) => OrganizationPermission::from($permission),
             $this->permissions
         );
     }
@@ -66,23 +66,23 @@ class Role
     public function setPermissions(array $permissions): void
     {
         $this->permissions = array_map(
-            static fn (Permission $permission) => $permission->value,
+            static fn (OrganizationPermission $permission) => $permission->value,
             $permissions
         );
     }
 
-    public function hasPermission(Permission $permission): bool
+    public function hasPermission(OrganizationPermission $permission): bool
     {
         return in_array($permission->value, $this->permissions, true);
     }
 
-    public function addPermission(Permission $permission): void {
+    public function addPermission(OrganizationPermission $permission): void {
         if (!$this->hasPermission($permission)) {
             $this->permissions[] = $permission->value;
         }
     }
 
-    public function removePermission(Permission $permission): void {
+    public function removePermission(OrganizationPermission $permission): void {
         if ($this->hasPermission($permission)) {
             $this->permissions = array_values(array_filter(
                 $this->permissions,

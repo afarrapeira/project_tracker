@@ -29,7 +29,7 @@ class ProjectMember
         }
     }
 
-    #[ORM\ManyToOne(targetEntity: Project::class, inversedBy: "members")]
+    #[ORM\ManyToOne(targetEntity: Project::class, inversedBy: "projectMembers")]
     #[ORM\JoinColumn(nullable: false, onDelete: 'CASCADE')]
     public ?Project $project = null {
         get {
@@ -40,7 +40,7 @@ class ProjectMember
         }
     }
 
-    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: "memberships")]
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: "projectMembers")]
     #[ORM\JoinColumn(nullable: false, onDelete: 'CASCADE')]
     public ?User $user = null {
         get {
@@ -48,6 +48,16 @@ class ProjectMember
         }
         set {
             $this->user = $value;
+        }
+    }
+
+    #[ORM\ManyToOne(targetEntity: ProjectRole::class)]
+    public ?ProjectRole $role = null {
+        get {
+            return $this->role;
+        }
+        set {
+            $this->role = $value;
         }
     }
 

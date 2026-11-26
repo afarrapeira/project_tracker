@@ -2,18 +2,18 @@
 
 namespace App\Repository;
 
-use App\Entity\Role;
+use App\Entity\ProjectRole;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<Role>
+ * @extends ServiceEntityRepository<ProjectRole>
  */
-class RoleRepository extends ServiceEntityRepository
+class ProjectRoleRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Role::class);
+        parent::__construct($registry, ProjectRole::class);
     }
 
 }
